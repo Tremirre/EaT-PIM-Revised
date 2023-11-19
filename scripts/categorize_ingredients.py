@@ -26,6 +26,8 @@ Return a VALID json (parsable) object with the following format:
 }
 """
 SYSTEM_MESSAGE = {"role": "system", "content": PROMPT}
+TEMPERATURE = 0
+SEED = 0
 
 
 def setup_args():
@@ -87,6 +89,8 @@ async def categorize_ingredients(
             SYSTEM_MESSAGE,
             {"role": "user", "content": batch_content},
         ],
+        seed=SEED,
+        temperature=TEMPERATURE,
     )
     content = response.choices[0].message.content.strip()
     start_idx = content.find("{")
