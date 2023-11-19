@@ -88,16 +88,16 @@ async def categorize_ingredients(
             {"role": "user", "content": batch_content},
         ],
     )
-    content = (
-        response.choices[0]
-        .message.content.strip()
-        .removeprefix("```json\n")
-        .removesuffix("\n```")
-    )
+    content = response.choices[0].message.content.strip()
+    start_idx = content.find("{")
+    end_idx = content.find("}")
+    json_content = content[start_idx : end_idx + 1]
     print(f"Batch {idx} completed")
     try:
-        return json.loads(content)
-    except json.JSONDecodeError as e:
+        if start_idx == -1 or end_idx == -1:
+            raise ValueError("No JSON found")
+        return json.loads(json_content)
+    except (json.JSONDecodeError, ValueError) as e:
         dump_bad_response(content, idx, e)
         return {}
 
