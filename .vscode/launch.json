@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name":"Python: Categorize Ingredients",
+            "type":"python",
+            "request":"launch",
+            "program":"${workspaceFolder}/scripts/categorize_ingredients.py",
+            "console":"integratedTerminal",
+            "args": [
+                "--input", "./data/RAW_RE"
+            ],
+            "justMyCode":true
+        },
+        {
             "name": "Python: Parse Documents",
             "type": "python",
             "request": "launch",

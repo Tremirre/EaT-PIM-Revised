@@ -1,4 +1,5 @@
 data
+scripts/failed/*.txt
 
 **/*.pyc
 .env
