@@ -9,7 +9,6 @@ def create_formula(words):
 
 
 def split_ingriedents(word, formula):
-    splited_words = []
     return re.split(formula, word)
 
 
@@ -23,8 +22,7 @@ def check_matching(word, sentence):
             if word in i and word[0] == i[0]:
                 return True
         return False
-    else:
-        return word in sentence
+    return word in sentence
 
 
 def create_map(groups):
