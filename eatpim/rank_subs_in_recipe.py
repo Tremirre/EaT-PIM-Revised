@@ -345,7 +345,7 @@ def load_embedding_data(main_dir, model_dir) -> FGCalculator:
     ent_embs = np.load((main_dir / model_dir / "entity_embedding.npy").resolve())
     rel_embs = np.load((main_dir / model_dir / "relation_embedding.npy").resolve())
 
-    with open((main_dir / "eatpim_triple_data/entities.dict").resolve()) as fin:
+    with open((main_dir / "triple_data/entities.dict").resolve()) as fin:
         id2entity = dict()
         entity2id = dict()
         for line in fin:
@@ -353,7 +353,7 @@ def load_embedding_data(main_dir, model_dir) -> FGCalculator:
             entity2id[entity] = int(eid)
             id2entity[int(eid)] = entity
 
-    with open((main_dir / "eatpim_triple_data/relations.dict").resolve()) as fin:
+    with open((main_dir / "triple_data/relations.dict").resolve()) as fin:
         relation2id = dict()
         for line in fin:
             rid, relation = line.strip().split("\t")
@@ -426,7 +426,7 @@ if __name__ == "__main__":
     import random
 
     for dset in ["train.txt", "valid.txt", "test.txt"]:
-        with open((main_dir / f"eatpim_triple_data/{dset}").resolve()) as fin:
+        with open((main_dir / f"triple_data/{dset}").resolve()) as fin:
             for line in fin:
                 graph_dict = json.loads(line)
                 # there should only be one item in the first depth of this dict
