@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name":"Python: Rank substitutes",
+            "type":"python",
+            "request":"launch",
+            "program":"./eatpim/rank_subs_in_recipe.py",
+            "args": [
+                "--data_dir",
+                "recipe_parsed_sm",
+                "--model_dir",
+                "models/GraphOps_recipe_parsed_sm_graph_TransE",
+                "--target_recipe",
+                "44061",
+                "--target_ingredient",
+                "pepper"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "console":"integratedTerminal",
+            "justMyCode":true
+        },
+        {
             "name":"Python: Categorize Ingredients",
             "type":"python",
             "request":"launch",
