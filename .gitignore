@@ -1,4 +1,4 @@
-data
+data/
 scripts/failed/*.txt
 
 **/*.pyc

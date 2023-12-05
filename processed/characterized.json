@@ -1,0 +1,2312 @@
+{
+    "spice": {
+        "origin": "spice",
+        "type": "other",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "honey": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "butter": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "oil": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "salt": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "high",
+        "smell": "salty",
+        "smell-intensity": "high"
+    },
+    "egg": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "milk": {
+        "origin": "dairy",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "pepper": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "cheese": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "salty",
+        "taste-intensity": "high",
+        "smell": "salty",
+        "smell-intensity": "high"
+    },
+    "beef": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "paste": {
+        "origin": "other",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "soup": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "beans": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "water": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "chili": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "high",
+        "smell": "spicy",
+        "smell-intensity": "high"
+    },
+    "lettuce": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "cheddar": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "salty",
+        "taste-intensity": "high",
+        "smell": "salty",
+        "smell-intensity": "high"
+    },
+    "parsley": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "juice": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "sugar": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "powder",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "apple": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "garlic": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "orange": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "sauce": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "liquid": {
+        "origin": "other",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "cumin": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "cinnamon": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "syrup": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "banana": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "whipped": {
+        "origin": "other",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "sour cream": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "vanilla": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "strawberr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "walnuts": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "molasses": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "corn": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "onion": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "mustard": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "bacon": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "high",
+        "smell": "salty",
+        "smell-intensity": "high"
+    },
+    "whiskey": {
+        "origin": "other",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "high",
+        "smell": "sour",
+        "smell-intensity": "high"
+    },
+    "ham": {
+        "origin": "meat",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "flour": {
+        "origin": "grain",
+        "type": "raw",
+        "state": "powder",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "celery": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "low",
+        "smell": "salty",
+        "smell-intensity": "low"
+    },
+    "pork": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "broth": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "cauliflower": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "potato": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "bouillon": {
+        "origin": "other",
+        "type": "processed",
+        "state": "powder",
+        "texture": "other",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "peas": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "low",
+        "smell": "sweet",
+        "smell-intensity": "low"
+    },
+    "spinach": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "bitter",
+        "smell-intensity": "low"
+    },
+    "seasoning": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "powder",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "paprika": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "powder",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "extract": {
+        "origin": "other",
+        "type": "processed",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "bread": {
+        "origin": "grain",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "jalapeno": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "tomato": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "zucchini": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "cabbage": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "parmesan": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "margarine": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "rosemary": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "bitter",
+        "smell-intensity": "low"
+    },
+    "carrot": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "low",
+        "smell": "sweet",
+        "smell-intensity": "low"
+    },
+    "broccoli": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "bitter",
+        "smell-intensity": "low"
+    },
+    "chicken": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "oregano": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "vegetable": {
+        "origin": "vegetable",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "pecan": {
+        "origin": "nut",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "raisins": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "beer": {
+        "origin": "other",
+        "type": "processed",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "bitter",
+        "taste-intensity": "medium",
+        "smell": "bitter",
+        "smell-intensity": "medium"
+    },
+    "chives": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "basil": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "pepperoni": {
+        "origin": "meat",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "coconut": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "nuts": {
+        "origin": "nut",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "sausage": {
+        "origin": "meat",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "herbs": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "ketchup": {
+        "origin": "other",
+        "type": "processed",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "salsa": {
+        "origin": "other",
+        "type": "processed",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "pasta": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "lemon": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "cilantro": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "yogurt": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "pea": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "low",
+        "smell": "sweet",
+        "smell-intensity": "low"
+    },
+    "bay lea": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "thyme": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "cracker": {
+        "origin": "grain",
+        "type": "processed",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "mayonnaise": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "other",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "caper": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "gelatin": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "cookie": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "sesame": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "wine": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "cucumber": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sour",
+        "taste-intensity": "low",
+        "smell": "sour",
+        "smell-intensity": "low"
+    },
+    "cocoa": {
+        "origin": "other",
+        "type": "raw",
+        "state": "powder",
+        "texture": "other",
+        "taste": "bitter",
+        "taste-intensity": "medium",
+        "smell": "bitter",
+        "smell-intensity": "medium"
+    },
+    "pie filling": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "salmon": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "bean": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "ginger": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "spicy",
+        "taste-intensity": "high",
+        "smell": "spicy",
+        "smell-intensity": "high"
+    },
+    "avocado": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "bitter",
+        "taste-intensity": "low",
+        "smell": "bitter",
+        "smell-intensity": "low"
+    },
+    "chocolate": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "dip": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "dill": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "lime": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "mushroom": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "spaghetti": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "vinegar": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "high",
+        "smell": "sour",
+        "smell-intensity": "high"
+    },
+    "turkey": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "radish": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "spicy",
+        "taste-intensity": "medium",
+        "smell": "spicy",
+        "smell-intensity": "medium"
+    },
+    "rice": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "fish": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "squash": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "artichoke": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "coriander": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "pie": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "pumpkin": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "seed": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "shells": {
+        "origin": "other",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "tortilla": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "sazon": {
+        "origin": "spice",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "macaroni": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "almonds": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "horseradish": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "sour",
+        "taste-intensity": "high",
+        "smell": "sour",
+        "smell-intensity": "high"
+    },
+    "berr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "blueberr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "pudding": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "asparagus": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "pickle": {
+        "origin": "vegetable",
+        "type": "processed",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sour",
+        "taste-intensity": "high",
+        "smell": "sour",
+        "smell-intensity": "high"
+    },
+    "linguine": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "feta": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "meat": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "tuna": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "ramen": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "marinade": {
+        "origin": "other",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "mango": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "cardamom": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "tea": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "steak": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "greens": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "beet": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "biscuit": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "espresso": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "bitter",
+        "taste-intensity": "high",
+        "smell": "bitter",
+        "smell-intensity": "high"
+    },
+    "rum": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sour",
+        "taste-intensity": "high",
+        "smell": "sour",
+        "smell-intensity": "high"
+    },
+    "pineapple": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "cake": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "fruit": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "flavoring": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "seafood": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "marshmallow": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "eggplant": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "shrimp": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "olive": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "nectar": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "grape": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "dressing": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "curry": {
+        "origin": "spice",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "crab": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "vodka": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "ice cream": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "jam": {
+        "origin": "fruit",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "oats": {
+        "origin": "grain",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "yeast": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "raspberr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "brownie": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "peppermint": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "minty",
+        "taste-intensity": "high",
+        "smell": "minty",
+        "smell-intensity": "high"
+    },
+    "leaves": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "earthy",
+        "taste-intensity": "low",
+        "smell": "earthy",
+        "smell-intensity": "low"
+    },
+    "noodle": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "neutral",
+        "taste-intensity": "low",
+        "smell": "neutral",
+        "smell-intensity": "low"
+    },
+    "pancake": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "soy": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "lamb": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "salami": {
+        "origin": "meat",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "high",
+        "smell": "salty",
+        "smell-intensity": "high"
+    },
+    "cereal": {
+        "origin": "grain",
+        "type": "processed",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "caramel": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "pretzel": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "wheat": {
+        "origin": "grain",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "earthy",
+        "taste-intensity": "low",
+        "smell": "earthy",
+        "smell-intensity": "low"
+    },
+    "cranberr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sour",
+        "taste-intensity": "medium",
+        "smell": "sour",
+        "smell-intensity": "medium"
+    },
+    "kielbasa": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "coffee": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "bitter",
+        "taste-intensity": "medium",
+        "smell": "bitter",
+        "smell-intensity": "medium"
+    },
+    "roast": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "paper": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "fillet": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "pizza": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "savory",
+        "taste-intensity": "medium",
+        "smell": "savory",
+        "smell-intensity": "medium"
+    },
+    "almond": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "nutty",
+        "taste-intensity": "medium",
+        "smell": "nutty",
+        "smell-intensity": "medium"
+    },
+    "prosciutto": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "brandy": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "liqueur": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "cider": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "soda": {
+        "origin": "other",
+        "type": "other",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "cand": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "scallops": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "medium",
+        "smell": "umami",
+        "smell-intensity": "medium"
+    },
+    "marmalade": {
+        "origin": "other",
+        "type": "other",
+        "state": "solid",
+        "texture": "other",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "tofu": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "neutral",
+        "taste-intensity": "low",
+        "smell": "neutral",
+        "smell-intensity": "low"
+    },
+    "ravioli": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "savory",
+        "taste-intensity": "medium",
+        "smell": "savory",
+        "smell-intensity": "medium"
+    },
+    "sandwich": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "varied",
+        "taste-intensity": "varied",
+        "smell": "varied",
+        "smell-intensity": "varied"
+    },
+    "cherr": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "lentils": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "earthy",
+        "taste-intensity": "medium",
+        "smell": "earthy",
+        "smell-intensity": "medium"
+    },
+    "hazelnut": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "hard",
+        "taste": "nutty",
+        "taste-intensity": "medium",
+        "smell": "nutty",
+        "smell-intensity": "medium"
+    },
+    "hummus": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "savory",
+        "taste-intensity": "medium",
+        "smell": "savory",
+        "smell-intensity": "medium"
+    },
+    "apricot": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "pastry": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "mascarpone": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "mint": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "low",
+        "smell": "sweet",
+        "smell-intensity": "low"
+    },
+    "gnocchi": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "fig": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "croissant": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "meatballs": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "umami",
+        "taste-intensity": "high",
+        "smell": "umami",
+        "smell-intensity": "high"
+    },
+    "chile": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "other",
+        "taste": "spicy",
+        "taste-intensity": "high",
+        "smell": "spicy",
+        "smell-intensity": "high"
+    },
+    "popcorn": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "duck": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "clams": {
+        "origin": "other",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "salad": {
+        "origin": "vegetable",
+        "type": "raw",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "plum": {
+        "origin": "fruit",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "flakes": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "other",
+        "taste-intensity": "low",
+        "smell": "other",
+        "smell-intensity": "low"
+    },
+    "sardin": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "anchovy": {
+        "origin": "meat",
+        "type": "raw",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "marrow": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "tapenade": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "gravy": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "liquid",
+        "texture": "other",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "granola": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "gingerbread": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "jelly": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "veal": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "lobster": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "ribs": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "mackerel": {
+        "origin": "meat",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "tortellini": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "pierogi": {
+        "origin": "grain",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "other",
+        "taste-intensity": "medium",
+        "smell": "other",
+        "smell-intensity": "medium"
+    },
+    "fries": {
+        "origin": "other",
+        "type": "cooked",
+        "state": "solid",
+        "texture": "crunchy",
+        "taste": "salty",
+        "taste-intensity": "medium",
+        "smell": "salty",
+        "smell-intensity": "medium"
+    },
+    "sorbet": {
+        "origin": "fruit",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    },
+    "grain": {
+        "origin": "grain",
+        "type": "other",
+        "state": "other",
+        "texture": "other",
+        "taste": "other",
+        "taste-intensity": "other",
+        "smell": "other",
+        "smell-intensity": "other"
+    },
+    "fudge": {
+        "origin": "other",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "high",
+        "smell": "sweet",
+        "smell-intensity": "high"
+    },
+    "gelato": {
+        "origin": "dairy",
+        "type": "processed",
+        "state": "solid",
+        "texture": "soft",
+        "taste": "sweet",
+        "taste-intensity": "medium",
+        "smell": "sweet",
+        "smell-intensity": "medium"
+    }
+}

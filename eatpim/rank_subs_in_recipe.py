@@ -48,7 +48,7 @@ class FGCalculator:
             self.id2relation[v] = k
 
     def GOpTranseCalcOperation(self, *, ops, rem_ing, rep_ing=None):
-        if isinstance(ops, frozendict):
+        if isinstance(ops, frozendict) or isinstance(ops, dict):
             # we expect only 1 key/val pair in this dict. the key is the relation type, the val is
             # a list of entities or other operations that are performed
             for k, v in ops.items():
@@ -249,7 +249,7 @@ def main(
         f"number of intermediate nodes: {recipe_intermediatenode_count[target_recipe_output]}"
     )
     target_recipe_graph = graphs[target_recipe_output]
-    # simple_visualize(target_recipe_graph)
+    simple_visualize(target_recipe_graph)
 
     t1sim = get_ing_cooc_cosine_sims(
         target_ing=target_replace_ing,
@@ -432,7 +432,7 @@ if __name__ == "__main__":
                 # there should only be one item in the first depth of this dict
                 # the key is the output recipe node, the value is the dictionary representation of the flowgraph
                 for k, v in graph_dict.items():
-                    recipe_operations[str(k)] = content_to_ids(v)
+                    recipe_operations[str(k)] = v  # content_to_ids(v)
 
     main(
         input_file=input_file,
