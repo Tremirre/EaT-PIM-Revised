@@ -11,6 +11,15 @@ class RecipeData:
     graph: nx.DiGraph
     ingredients: set[str]
 
+    def ingredient_actions(self, ingredient: str) -> set[str]:
+        if ingredient not in self.ingredients:
+            raise ValueError(f"Ingredient {ingredient} not in recipe")
+        return {
+            node.split("_")[1]
+            for node in nx.dfs_successors(self.graph, ingredient).keys()
+            if node != ingredient
+        }
+
 
 def parse_graph_tree(
     graph_tree: dict, valid_ingredients: set[str]
