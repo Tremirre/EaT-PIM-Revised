@@ -61,6 +61,14 @@ def group_ingredients(
     return map_groups
 
 
+def find_group(ingredient: str, groups: dict[str, typing.Iterable[str]]):
+    for group, sub_groups in groups.items():
+        for sub_group in sub_groups:
+            if is_part_of_group(sub_group, ingredient):
+                return sub_group
+    return "uncategorized"
+
+
 def invert_grouping(grouping: IngredientGrouping) -> dict[str, list[str]]:
     return {
         val: key
