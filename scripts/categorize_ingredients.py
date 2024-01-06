@@ -18,6 +18,7 @@ For each ingredient, categorize it to higher level category. Some examples are:
 Reduce number of non-essensial words as much as possible.
 If an ingredient is already categorized, leave it as is.
 If you can't categorize an ingredient, mark it as "unknown".
+IMPORTANT: use SINGULAR form of the resulting category.
 
 Return a VALID json (parsable) object with the following format:
 {
