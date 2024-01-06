@@ -25,13 +25,16 @@ from collections import defaultdict
 import time
 import argparse
 import os
+
 spacy.prefer_gpu()
 
 
 NON_STOP_WORDS = {"all", "everything"}
 
 
-def parse_documents(*, texts: List[Tuple[List[str], Dict[str, int]]]) -> Dict[int, Dict[int, Doc]]:
+def parse_documents(
+    *, texts: List[Tuple[List[str], Dict[str, int]]]
+) -> Dict[int, Dict[int, Doc]]:
     nlp = spacy.load("en_core_web_trf")
     start_time = time.time()
 
@@ -41,36 +44,50 @@ def parse_documents(*, texts: List[Tuple[List[str], Dict[str, int]]]) -> Dict[in
     count = 0
     total_count = len(texts)
 
-    for doc, context in nlp.pipe(texts, disable=["ner", "textcat", "token2vec"], as_tuples=True):
+    for doc, context in nlp.pipe(
+        texts, disable=["ner", "textcat", "token2vec"], as_tuples=True
+    ):
         res = process_doc(doc)
-        if (not res['subj_pred'] and
-            not res['pred_obj'] and
-            not res['modifying_subj_pred'] and
-            not res['modifying_pred_obj']):
+        if (
+            not res["subj_pred"]
+            and not res["pred_obj"]
+            and not res["modifying_subj_pred"]
+            and not res["modifying_pred_obj"]
+        ):
             # spaCy apparently has trouble parsing imperative sentences due to the lack of training data.
             # so when no verb is found in the sentence, we can try to modify it to make it easier to parse
             # e.g., "add water" can end up with a parse where "add water" is identified as a noun
             # instead, we add "you" to make the sentence be like "you add water"
             # this sometimes makes sentences look awkward grammatically, but it helps the parser
             # especially in cases where the first word is a verb
-            modified_text = [('you '+res['step_string'], context)]
-            newtry, context = list(nlp.pipe(modified_text, disable=["ner", "textcat", "token2vec"], as_tuples=True))[0]
+            modified_text = [("you " + res["step_string"], context)]
+            newtry, context = list(
+                nlp.pipe(
+                    modified_text,
+                    disable=["ner", "textcat", "token2vec"],
+                    as_tuples=True,
+                )
+            )[0]
             newres = process_doc(newtry)
             # if the updated parse changed enough that verbs were added, save the new result. otherwise,
             # we just keep the original.
-            if len(newres['verbs']) > 0:
+            if len(newres["verbs"]) > 0:
                 # make the step's text be the same as the original, rather than the weird 'you ...' form
-                newres['step_string'] = res['step_string']
+                newres["step_string"] = res["step_string"]
                 res = newres
         output_dict[context["recipe_id"]][context["step_num"]] = res
         count += 1
         if count % 1000 == 0:
-            print(f"recipe progress: {round(count/total_count, 4)} : {round(time.time()-start_time, 2)}s elapsed")
+            print(
+                f"recipe progress: {round(count/total_count, 4)} : {round(time.time()-start_time, 2)}s elapsed"
+            )
 
     return output_dict
 
 
-def parse_ings(*, texts: List[Tuple[List[str], Dict[str, int]]]) -> Dict[int, List[str]]:
+def parse_ings(
+    *, texts: List[Tuple[List[str], Dict[str, int]]]
+) -> Dict[int, List[str]]:
     nlp = spacy.load("en_core_web_trf")
     start_time = time.time()
 
@@ -79,42 +96,64 @@ def parse_ings(*, texts: List[Tuple[List[str], Dict[str, int]]]) -> Dict[int, Li
 
     output_dict = defaultdict(lambda: set())
 
-    for doc, context in nlp.pipe(texts, disable=["ner", "textcat", "token2vec"], as_tuples=True):
+    for doc, context in nlp.pipe(
+        texts, disable=["ner", "textcat", "token2vec"], as_tuples=True
+    ):
         output_dict[context["recipe_id"]].add(process_ing(doc))
 
         count += 1
         if count % 1000 == 0:
-            print(f"ingredient progress: {round(count/total_count, 4)} : {round(time.time()-start_time, 2)}s elapsed")
+            print(
+                f"ingredient progress: {round(count/total_count, 4)} : {round(time.time()-start_time, 2)}s elapsed"
+            )
 
     return dict(output_dict)
 
 
 # convert everything from Spacy tokens to strings, and also get rid of stopwords
 def clean_str(input, verb_modifier=None):
-
     if isinstance(input, spacy.tokens.token.Token):
-        if input.lemma_ in {'be', 'let', 'use'}:
-            return ''
-        cleaned_str = str(input.lemma_).replace("-", "").replace("{", "").replace("}", "")
+        if input.lemma_ in {"be", "let", "use"}:
+            return ""
+        cleaned_str = (
+            str(input.lemma_).replace("-", "").replace("{", "").replace("}", "")
+        )
         if verb_modifier and input in verb_modifier.keys():
-            cleaned_str += " "+str(verb_modifier[input]).replace("-", "").replace("{", "").replace("}", "")
+            cleaned_str += " " + str(verb_modifier[input]).replace("-", "").replace(
+                "{", ""
+            ).replace("}", "")
         return cleaned_str
 
-    if input[0].lemma_ in {'be', 'let', 'use'}:
-        return ''
+    if input[0].lemma_ in {"be", "let", "use"}:
+        return ""
 
-    relevant_words = [w for w in input
-                      if ((not w.is_stop or str(w) in NON_STOP_WORDS)
-                          and not str(w) == "-" and
-                          not w.pos in {punct, PUNCT})]
+    relevant_words = [
+        w
+        for w in input
+        if (
+            (not w.is_stop or str(w) in NON_STOP_WORDS)
+            and not str(w) == "-"
+            and not w.pos in {punct, PUNCT}
+        )
+    ]
     if not relevant_words:
-        return ''
+        return ""
     elif len(relevant_words) == 1:
-        cleaned_str = str(relevant_words[0].lemma_).replace("-", "").replace("{", "").replace("}", "")
+        cleaned_str = (
+            str(relevant_words[0].lemma_)
+            .replace("-", "")
+            .replace("{", "")
+            .replace("}", "")
+        )
         return cleaned_str
 
     # get rid of stay dashes, which seem relatively common
-    cleaned_words = " ".join([str(w).replace("-", "").replace("{", "").replace("}","") for w in relevant_words[:-1]])
+    cleaned_words = " ".join(
+        [
+            str(w).replace("-", "").replace("{", "").replace("}", "")
+            for w in relevant_words[:-1]
+        ]
+    )
     # lemmatize the last word
     cleaned_words += f" {str(relevant_words[-1].lemma_).replace('-', '')}"
     return cleaned_words
@@ -122,6 +161,7 @@ def clean_str(input, verb_modifier=None):
 
 def process_ing(doc):
     return clean_str(doc)
+
 
 def process_doc(doc):
     xcomp_connector = defaultdict(lambda: set())
@@ -189,7 +229,11 @@ def process_doc(doc):
             # ignoring these for now.
             continue
         elif word.head.pos in {VERB, AUX}:
-            if word.dep in {mark, prep, prt} and word.head.head and word.head.head != word.head:
+            if (
+                word.dep in {mark, prep, prt}
+                and word.head.head
+                and word.head.head != word.head
+            ):
                 process_spec_contents.add((word.head.head, word, word.head))
                 continue
             if word.pos in {CONJ, CCONJ, ADV, ADP, PART}:
@@ -202,32 +246,36 @@ def process_doc(doc):
 
             # use spacy's built-in nounchunks to get the whole part of the noun instead of a single word
             # e.g. get the noun chunk "ground meat" instead of just "meat"
-            subtree = doc[word.left_edge.i:word.right_edge.i + 1]
+            subtree = doc[word.left_edge.i : word.right_edge.i + 1]
             noun_chunks = [nc for nc in subtree.noun_chunks]
             if noun_chunks:
                 for nc in noun_chunks:
                     # pass being in the dependency indicates it is a passive voice
-                    if 'subj' in word.dep_ and 'pass' not in word.dep_:
+                    if "subj" in word.dep_ and "pass" not in word.dep_:
                         subj_pred[nc].add(word.head)
                     else:
                         pred_obj[word.head].add(nc)
                     nounchunk_deps[nc] = nc[-1].dep_
             else:
                 # no noun chunks, just assume it's one big noun or something that's not a noun
-                if 'subj' in word.dep_ and 'pass' not in word.dep_:
+                if "subj" in word.dep_ and "pass" not in word.dep_:
                     subj_pred[subtree].add(word.head)
                 else:
                     pred_obj[word.head].add(subtree)
                 nounchunk_deps[subtree] = subtree[-1].dep_
         elif word.head.dep == advcl:
-            if word.dep in {mark, prep} and word.head.head and word.head.head != word.head:
+            if (
+                word.dep in {mark, prep}
+                and word.head.head
+                and word.head.head != word.head
+            ):
                 process_spec_contents.add((word.head.head, word, word.head))
         elif word.head.dep in {prep}:
             # the head's dependency is a preposition
             # this indicates a situation like "brown the meat in a pot", where the current word we're looking at is
             # "pot", and its head is "in", which has the prep relation to "meat"
             # we want to be able to later make the connection ("brown", "in", "pot")
-            subtree = doc[word.left_edge.i:word.right_edge.i + 1]
+            subtree = doc[word.left_edge.i : word.right_edge.i + 1]
             noun_chunks = [nc for nc in subtree.noun_chunks]
             if len(noun_chunks):
                 for nc in noun_chunks:
@@ -239,17 +287,17 @@ def process_doc(doc):
         elif word.head.dep in {prt} and word.head.head:
             # this case occurs in cases like "cut in the butter with a fork ...", where we want to use the action
             # as "cut in". "in" has the prt relation to "cut", and "butter" is the pobj of "in".
-            subtree = doc[word.left_edge.i:word.right_edge.i + 1]
+            subtree = doc[word.left_edge.i : word.right_edge.i + 1]
             noun_chunks = [nc for nc in subtree.noun_chunks]
             if len(noun_chunks):
                 for nc in noun_chunks:
-                    if 'subj' in word.dep_ and 'pass' not in word.dep_:
+                    if "subj" in word.dep_ and "pass" not in word.dep_:
                         subj_pred[nc].add(word.head.head)
                     else:
                         pred_obj[word.head.head].add(nc)
                     nounchunk_deps[nc] = nc[-1].dep_
             else:
-                if 'subj' in word.dep_ and 'pass' not in word.dep_:
+                if "subj" in word.dep_ and "pass" not in word.dep_:
                     subj_pred[subtree].add(word.head.head)
                 else:
                     pred_obj[word.head.head].add(subtree)
@@ -324,11 +372,11 @@ def process_doc(doc):
         "root_verb": "",
         "noun_chunks": set(),
         "action_prep_obj": set(),
-        "step_string": str(doc)
+        "step_string": str(doc),
     }
     for v in verbs:
-        if v.dep_ == 'ROOT':
-            output_strings['root_verb'] = clean_str(v, verb_modifier=verb_modifier)
+        if v.dep_ == "ROOT":
+            output_strings["root_verb"] = clean_str(v, verb_modifier=verb_modifier)
 
     # verbs are all single words.
     for k, val_set in subj_pred.items():
@@ -338,13 +386,13 @@ def process_doc(doc):
             if not (cleaned_subj and cleaned_pred):
                 continue
             if v.dep in {advcl}:
-                output_strings["modifying_subj_pred"].add((cleaned_subj,
-                                                           cleaned_pred,
-                                                           v.i))
+                output_strings["modifying_subj_pred"].add(
+                    (cleaned_subj, cleaned_pred, v.i)
+                )
             else:
-                output_strings["subj_pred"].add((cleaned_subj,
-                                                 cleaned_pred,
-                                                 v.i, nounchunk_deps[k]))
+                output_strings["subj_pred"].add(
+                    (cleaned_subj, cleaned_pred, v.i, nounchunk_deps[k])
+                )
     for k, val_set in pred_obj.items():
         for v in val_set:
             cleaned_obj = clean_str(v)
@@ -352,18 +400,20 @@ def process_doc(doc):
             if not (cleaned_obj and cleaned_pred):
                 continue
             if k.dep in {advcl}:
-                output_strings["modifying_pred_obj"].add((cleaned_pred,
-                                                          cleaned_obj,
-                                                          k.i))
+                output_strings["modifying_pred_obj"].add(
+                    (cleaned_pred, cleaned_obj, k.i)
+                )
             else:
-                output_strings["pred_obj"].add((cleaned_pred,
-                                                cleaned_obj,
-                                                k.i, nounchunk_deps[v]))
+                output_strings["pred_obj"].add(
+                    (cleaned_pred, cleaned_obj, k.i, nounchunk_deps[v])
+                )
 
-    output_strings["verbs"] = set(clean_str(verb, verb_modifier=verb_modifier) for verb in verbs)-{''}
-    output_strings["noun_chunks"] = set(clean_str(np) for np in all_noun_chunks)-{''}
+    output_strings["verbs"] = set(
+        clean_str(verb, verb_modifier=verb_modifier) for verb in verbs
+    ) - {""}
+    output_strings["noun_chunks"] = set(clean_str(np) for np in all_noun_chunks) - {""}
     # many prepositions also are considered stopwords, but don't filter them out.
-    for (s,p,o) in process_spec_contents:
+    for s, p, o in process_spec_contents:
         clean_s = clean_str(s, verb_modifier=verb_modifier)
         clean_p = clean_str(p)
         clean_o = clean_str(o)
@@ -373,10 +423,12 @@ def process_doc(doc):
     return output_strings
 
 
-def load_recipe_data(*, data_file: Path, recipe_choices: str, limit_n_recipes: int = -1):
+def load_recipe_data(
+    *, data_file: Path, recipe_choices: str, limit_n_recipes: int = -1
+):
     df = pd.read_csv(data_file.resolve())
-    df.set_index('id', inplace=True, drop=True)
-    df.drop(columns=['contributor_id', 'submitted'], inplace=True)
+    df.set_index("id", inplace=True, drop=True)
+    df.drop(columns=["contributor_id", "submitted"], inplace=True)
     # if a recipe limit is specified, randomly sample limit_n_recipes recipes from the loaded dataframe
     if limit_n_recipes != -1:
         df = df.sample(n=limit_n_recipes)
@@ -385,26 +437,40 @@ def load_recipe_data(*, data_file: Path, recipe_choices: str, limit_n_recipes: i
 
 
 def save_process_results(*, data, output_file: Path):
-    with open(output_file.resolve(), 'wb') as f:
+    with open(output_file.resolve(), "wb") as f:
         pickle.dump(data, f)
 
 
 def main(*, input_file: str, output_file: str, output_texts: str, n_recipes: int = 0):
-    raw_recipe_data = load_recipe_data(data_file=(path.DATA_DIR / input_file), limit_n_recipes=n_recipes, recipe_choices=output_texts)
+    raw_recipe_data = load_recipe_data(
+        data_file=(path.DATA_DIR / input_file),
+        limit_n_recipes=n_recipes,
+        recipe_choices=output_texts,
+    )
 
-    id_steps = list(zip(raw_recipe_data.index.values.tolist(), raw_recipe_data["steps"].values.tolist()))
-    id_ings = list(zip(raw_recipe_data.index.values.tolist(), raw_recipe_data["ingredients"].values.tolist()))
-    id_ings = [(ing, {"recipe_id": tup[0]})
-               for tup in id_ings
-               for ing in eval(tup[1])]
+    id_steps = list(
+        zip(
+            raw_recipe_data.index.values.tolist(),
+            raw_recipe_data["steps"].values.tolist(),
+        )
+    )
+    id_ings = list(
+        zip(
+            raw_recipe_data.index.values.tolist(),
+            raw_recipe_data["ingredients"].values.tolist(),
+        )
+    )
+    id_ings = [(ing, {"recipe_id": tup[0]}) for tup in id_ings for ing in eval(tup[1])]
 
-    print(f'{len(id_steps)} recipes total to be processed')
-    formatted_id_steps = [(step_str, {"recipe_id": id_steps_tup[0], "step_num": step_index})
-                          for id_steps_tup in id_steps
-                          for step_index, step_str in enumerate(eval(id_steps_tup[1]))]
+    print(f"{len(id_steps)} recipes total to be processed")
+    formatted_id_steps = [
+        (step_str, {"recipe_id": id_steps_tup[0], "step_num": step_index})
+        for id_steps_tup in id_steps
+        for step_index, step_str in enumerate(eval(id_steps_tup[1]))
+    ]
     fist = []
     for tup in formatted_id_steps:
-        tup_mod = tup[0]+"."
+        tup_mod = tup[0] + "."
         tup_mod = tup_mod.replace(" ,", ",")
         fist.append((tup_mod, tup[1]))
     formatted_id_steps = fist
@@ -460,7 +526,12 @@ if __name__ == "__main__":
 
     if not os.path.exists((path.DATA_DIR / args.output_dir).resolve()):
         os.makedirs((path.DATA_DIR / args.output_dir).resolve())
-    output_file = (path.DATA_DIR / args.output_dir / "parsed_recipes.pkl")
-    output_texts = (path.DATA_DIR / args.output_dir / "selected_recipes.csv")
+    output_file = path.DATA_DIR / args.output_dir / "parsed_recipes.pkl"
+    output_texts = path.DATA_DIR / args.output_dir / "selected_recipes.csv"
 
-    main(input_file=input_file, output_file=output_file, output_texts=output_texts, n_recipes=n_rec)
+    main(
+        input_file=input_file,
+        output_file=output_file,
+        output_texts=output_texts,
+        n_recipes=n_rec,
+    )
