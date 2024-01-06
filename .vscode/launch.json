@@ -49,6 +49,20 @@
             },
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Python: Preprocess Unique Names and Linking",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/eatpim/etl/preprocess_unique_names_and_linking.py",
+            "args": [
+                "--input_dir", "transformed"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

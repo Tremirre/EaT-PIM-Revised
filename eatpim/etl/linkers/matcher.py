@@ -16,8 +16,8 @@
 from abc import ABC, abstractmethod
 import numpy as np
 
-class Matcher(ABC):
 
+class Matcher(ABC):
     def l2_norm(self, mat):
         return np.sqrt(np.sum(mat.multiply(mat), axis=1))
 

@@ -25,32 +25,35 @@ from typing import List
 
 
 class FoodOnMatcher(Matcher):
-
-    def __init__(self, *,
-                 min_confidence: float = 0.75):
+    def __init__(self, *, min_confidence: float = 0.75):
         self.min_confidence_level = min_confidence
         g = rdflib.Graph()
-        onto_files = [str(f) for f in (path.DATA_DIR / "foodon_ontologies/").resolve().glob("*.owl")]
+        onto_files = [
+            str(f)
+            for f in (path.DATA_DIR / "foodon_ontologies/").resolve().glob("*.owl")
+        ]
         for onto_file in onto_files:
             g.parse(onto_file)
 
-        gene_o_ns = rdflib.Namespace('http://www.geneontology.org/formats/oboInOwl#')
-        obo_ns = rdflib.Namespace('http://purl.obolibrary.org/obo/')
+        gene_o_ns = rdflib.Namespace("http://www.geneontology.org/formats/oboInOwl#")
+        obo_ns = rdflib.Namespace("http://purl.obolibrary.org/obo/")
 
         valid_uris = set()
-        query_food_products = g.query("""
+        query_food_products = g.query(
+            """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX obo: <http://purl.obolibrary.org/obo/> 
         SELECT ?s
         WHERE {
         ?s (rdfs:subClassOf)* obo:FOODON_00001002 .
-        }""")
+        }"""
+        )
         for res in query_food_products:
             valid_uris.add(res.s)
 
         # subclass_graph will be used to measure the shortest distance between entities as the root note
         subclass_graph = nx.DiGraph()
-        root_uri = obo_ns['FOODON_00001002']
+        root_uri = obo_ns["FOODON_00001002"]
         subclass_graph_distances = {}
 
         self.label_to_uris = defaultdict(lambda: [])
@@ -61,10 +64,11 @@ class FoodOnMatcher(Matcher):
 
         # predicates, ordered by priority of the relation (ie if two things have the same word as 'label' and 'synonym', the
         # entity with the word as it's label is deemed "more correct" than the synonym, since the label is its primary name)
-        predicates = [rdflib.RDFS.label,
-                      gene_o_ns['hasExactSynonym'],
-                      gene_o_ns['hasSynonym'],
-                      ]
+        predicates = [
+            rdflib.RDFS.label,
+            gene_o_ns["hasExactSynonym"],
+            gene_o_ns["hasSynonym"],
+        ]
 
         for prio_ind, pred in enumerate(predicates):
             for s, v in g.subject_objects(predicate=pred):
@@ -92,34 +96,48 @@ class FoodOnMatcher(Matcher):
                 # a subclass of potato, and so on with similar ingredients that have names like 'x food product'
                 # thus, if we find 'food product' in the label, we also want to add another label which removes the
                 # 'food product' portion of the name.
-                if len(v.value) > 13 and v.value[-13:] == ' food product':
+                if len(v.value) > 13 and v.value[-13:] == " food product":
                     # everything besides the label is the same as the original
                     self.label_priority.append(prio_ind)
                     self.label_to_uris[v.value].append(s)
                     self.uris.append(s)
                     self.labels.append(v.value[:-13])
 
-
         # add subclasses to the subclass_graph for processing later
         seen_uris = set()
-        fg = rdflib.ConjunctiveGraph(identifier=rdflib.URIRef("http://bproj.com/RecipeInfoKG/FoodOnRelations"))
+        fg = rdflib.ConjunctiveGraph(
+            identifier=rdflib.URIRef("http://bproj.com/RecipeInfoKG/FoodOnRelations")
+        )
+
         def get_subclasses_of(obj):
             if obj in seen_uris:
                 return
             seen_uris.add(obj)
-            fg.add((obj, rdflib.RDF.type, rdflib.URIRef("http://bproj.com/RecipeInfoOnto/FoodOnEntity")))
+            fg.add(
+                (
+                    obj,
+                    rdflib.RDF.type,
+                    rdflib.URIRef("http://bproj.com/RecipeInfoOnto/FoodOnEntity"),
+                )
+            )
             for s in g.subjects(predicate=rdflib.RDFS.subClassOf, object=obj):
                 get_subclasses_of(s)
                 subclass_graph.add_edge(s, obj)
                 fg.add((s, rdflib.RDFS.subClassOf, obj))
+
         get_subclasses_of(root_uri)
-        fg.serialize(str((path.DATA_DIR / "foodon_ontologies/foodon_subclasses.nq").resolve()), format='nquads')
+        fg.serialize(
+            str((path.DATA_DIR / "foodon_ontologies/foodon_subclasses.nq").resolve()),
+            format="nquads",
+        )
 
         for ind, foodon_uri in enumerate(self.uris):
             if foodon_uri in subclass_graph_distances.keys():
                 self.hierarchy_priority.append(subclass_graph_distances[foodon_uri])
             else:
-                dist_to_root = nx.shortest_path_length(subclass_graph,source=foodon_uri,target=root_uri)
+                dist_to_root = nx.shortest_path_length(
+                    subclass_graph, source=foodon_uri, target=root_uri
+                )
                 subclass_graph_distances[foodon_uri] = dist_to_root
                 self.hierarchy_priority.append(dist_to_root)
 
@@ -134,8 +152,8 @@ class FoodOnMatcher(Matcher):
             return None, 0
         # compute cosine similarity
         dotprod = new_vec.dot(self.label_vectors.T)
-        div = (new_vec_l2 * self.label_vec_norm.T)
-        cosine_sim = dotprod / div
+        div = new_vec_l2 * self.label_vec_norm.T
+        cosine_sim = (dotprod / div).toarray()
 
         max_score = np.max(cosine_sim)
 

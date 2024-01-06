@@ -26,25 +26,24 @@ from spacy.parts_of_speech import VERB
 
 
 class WikidataMatcher(Matcher):
-
     def __init__(self, *, mode: str, nlp: spacy.Language, min_confidence: float = 0.75):
         self.min_confidence_level = min_confidence
 
         lemmatizer = nlp.get_pipe("lemmatizer")
-        wiki_ns = rdflib.Namespace('http://www.wikidata.org/entity/')
+        wiki_ns = rdflib.Namespace("http://www.wikidata.org/entity/")
         g = rdflib.ConjunctiveGraph()
-        if mode == 'equipment':
+        if mode == "equipment":
             filename = (path.DATA_DIR / "wikidata_cooking/cul_equip.nq").resolve()
-            root_uri = wiki_ns['Q26037047']
-            root_uri_cm = wiki_ns['Q57583712'] # for cooking appliance
-        elif mode == 'preparation':
+            root_uri = wiki_ns["Q26037047"]
+            root_uri_cm = wiki_ns["Q57583712"]  # for cooking appliance
+        elif mode == "preparation":
             filename = (path.DATA_DIR / "wikidata_cooking/food_prep.nq").resolve()
-            root_uri = wiki_ns['Q16920758']
-            root_uri_cm = wiki_ns['Q1039303'] # for cooking method
+            root_uri = wiki_ns["Q16920758"]
+            root_uri_cm = wiki_ns["Q1039303"]  # for cooking method
         else:
             return
 
-        g.parse(str(filename), format='nquads')
+        g.parse(str(filename), format="nquads")
 
         valid_uris = set()
 
@@ -60,16 +59,16 @@ class WikidataMatcher(Matcher):
 
         # predicates, ordered by priority of the relation (ie if two things have the same word as 'label' and 'synonym', the
         # entity with the word as it's label is deemed "more correct" than the synonym, since the label is its primary name)
-        predicates = [rdflib.RDFS.label,
-                      rdflib.URIRef("http://www.w3.org/2004/02/skos/core#/altLabel")
-                      ]
+        predicates = [
+            rdflib.RDFS.label,
+            rdflib.URIRef("http://www.w3.org/2004/02/skos/core#/altLabel"),
+        ]
 
         # RDFS label has a higher priority than altLabels. we want to get these in order so that we can use this
         # to break ties in cases where some entities share the main label with another one's alt label
         for prio_ind, pred in enumerate(predicates):
             for s, v in g.subject_objects(predicate=pred):
-
-                if not isinstance(v, rdflib.Literal) or v.value == '':
+                if not isinstance(v, rdflib.Literal) or v.value == "":
                     # error case, a couple thing have labels that arent strings
                     # also, get rid of things that aren't english labels
                     continue
@@ -80,7 +79,9 @@ class WikidataMatcher(Matcher):
                 if len(doc) == 1:
                     label = str(doc[0].lemma_)
                 else:
-                    label_prefix = " ".join([str(w) for w in doc[:-1] if not w.is_punct])
+                    label_prefix = " ".join(
+                        [str(w) for w in doc[:-1] if not w.is_punct]
+                    )
                     label = f"{label_prefix} {str(doc[-1].lemma_)}"
 
                 self.label_priority.append(prio_ind)
@@ -96,7 +97,10 @@ class WikidataMatcher(Matcher):
                 if doc[-1].pos != VERB:
                     mod_word = doc[-1]
                     mod_word.pos = VERB
-                    lem_words = [lemmatizer.lookup_lemmatize(mod_word)[0], lemmatizer.rule_lemmatize(mod_word)[0]]
+                    lem_words = [
+                        lemmatizer.lookup_lemmatize(mod_word)[0],
+                        lemmatizer.rule_lemmatize(mod_word)[0],
+                    ]
                     for lem_word in lem_words:
                         if lem_word != doc[-1].lemma_:
                             if len(doc) > 1:
@@ -108,9 +112,9 @@ class WikidataMatcher(Matcher):
                             self.uris.append(s)
                             self.labels.append(alt_label)
 
-
         # add subclasses to the subclass_graph for processing later
         seen_uris = set()
+
         def get_subclasses_of(obj):
             if obj in seen_uris:
                 return
@@ -119,10 +123,16 @@ class WikidataMatcher(Matcher):
             for s in g.subjects(predicate=rdflib.RDFS.subClassOf, object=obj):
                 get_subclasses_of(s)
                 relation_graph.add_edge(s, obj)
-            for s in g.subjects(predicate=rdflib.URIRef("http://www.wikidata.org/prop/direct/P31"), object=obj):
+            for s in g.subjects(
+                predicate=rdflib.URIRef("http://www.wikidata.org/prop/direct/P31"),
+                object=obj,
+            ):
                 get_subclasses_of(s)
                 relation_graph.add_edge(s, obj)
-            for s in g.subjects(predicate=rdflib.URIRef("http://www.wikidata.org/prop/direct/P361"), object=obj):
+            for s in g.subjects(
+                predicate=rdflib.URIRef("http://www.wikidata.org/prop/direct/P361"),
+                object=obj,
+            ):
                 get_subclasses_of(s)
                 relation_graph.add_edge(s, obj)
 
@@ -135,9 +145,13 @@ class WikidataMatcher(Matcher):
                 self.hierarchy_priority.append(subclass_graph_distances[wiki_uri])
             else:
                 if nx.has_path(relation_graph, wiki_uri, root_uri):
-                    dist_to_root = nx.shortest_path_length(relation_graph,source=wiki_uri,target=root_uri)
+                    dist_to_root = nx.shortest_path_length(
+                        relation_graph, source=wiki_uri, target=root_uri
+                    )
                 else:
-                    dist_to_root = nx.shortest_path_length(relation_graph, source=wiki_uri, target=root_uri_cm)
+                    dist_to_root = nx.shortest_path_length(
+                        relation_graph, source=wiki_uri, target=root_uri_cm
+                    )
                 subclass_graph_distances[wiki_uri] = dist_to_root
                 self.hierarchy_priority.append(dist_to_root)
 
@@ -156,8 +170,8 @@ class WikidataMatcher(Matcher):
             return None, 0
         # compute cosine similarity
         dotprod = new_vec.dot(self.label_vectors.T)
-        div = (new_vec_l2 * self.label_vec_norm.T)
-        cosine_sim = dotprod / div
+        div = new_vec_l2 * self.label_vec_norm.T
+        cosine_sim = (dotprod / div).toarray()
 
         max_score = np.max(cosine_sim)
 
