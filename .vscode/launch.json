@@ -42,7 +42,9 @@
             "request": "launch",
             "program": "${workspaceFolder}/eatpim/etl/parse_documents.py",
             "args": [
-                "--output_dir", "processed", "--n_recipes", "100"
+                "--output_dir", "parse_doc_testing", 
+                "--n_recipes", "100", 
+                "--input_file", "TRANSFORMED_recipes.csv",
             ],
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"
