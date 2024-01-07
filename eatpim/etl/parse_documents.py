@@ -19,23 +19,22 @@ from spacy.symbols import *
 import pickle
 from pathlib import Path
 import pandas as pd
-from typing import List, Tuple, Dict, Set, Union, Any
+import numpy as np
+from typing import List, Tuple, Dict, Any
 from eatpim.utils import path
 from collections import defaultdict
 import time
 import argparse
 import os
+import itertools
 
-spacy.prefer_gpu()
-
-
+nlp = spacy.load("en_core_web_trf")
 NON_STOP_WORDS = {"all", "everything"}
 
 
 def parse_documents(
     *, texts: List[Tuple[List[str], Dict[str, int]]]
 ) -> Dict[int, Dict[int, Doc]]:
-    nlp = spacy.load("en_core_web_trf")
     start_time = time.time()
 
     # dictionary of the form {recipe_id: {step_num: doc}}
@@ -43,9 +42,11 @@ def parse_documents(
 
     count = 0
     total_count = len(texts)
-
+    fixed_texts = (
+        (text, (context["recipe_id"], context["step_num"])) for text, context in texts
+    )
     for doc, context in nlp.pipe(
-        texts, disable=["ner", "textcat", "token2vec"], as_tuples=True
+        fixed_texts, disable=["ner", "textcat", "token2vec"], as_tuples=True
     ):
         res = process_doc(doc)
         if (
@@ -75,7 +76,7 @@ def parse_documents(
                 # make the step's text be the same as the original, rather than the weird 'you ...' form
                 newres["step_string"] = res["step_string"]
                 res = newres
-        output_dict[context["recipe_id"]][context["step_num"]] = res
+        output_dict[context[0]][context[1]] = res
         count += 1
         if count % 1000 == 0:
             print(
@@ -200,7 +201,7 @@ def process_doc(doc):
             # e.g., this case occurs for "add to bowl" - "to" has a prep dependency to "add"
             if word.head.pos in {VERB, AUX}:
                 prep_connector_process[word].add(word.head)
-        elif word.dep in {prt}:
+        elif word.dep in {prt} and word.head.pos in {VERB, AUX}:
             # prt is a phrasal verb modifier - e.g., this case occurs for "mix in the butter", where
             # "mix in" should be considered a single action. "in" has the prt relation to "stir".
             # this differentiates between a case like "mix in a bowl", where "mix" is taking place in a bowl
@@ -426,7 +427,7 @@ def process_doc(doc):
 def load_recipe_data(
     *, data_file: Path, recipe_choices: str, limit_n_recipes: int = -1
 ):
-    df = pd.read_csv(data_file.resolve())
+    df: pd.DataFrame = pd.read_csv(data_file.resolve())
     df.set_index("id", inplace=True, drop=True)
     df.drop(columns=["contributor_id", "submitted"], inplace=True)
     # if a recipe limit is specified, randomly sample limit_n_recipes recipes from the loaded dataframe
@@ -441,28 +442,36 @@ def save_process_results(*, data, output_file: Path):
         pickle.dump(data, f)
 
 
-def main(*, input_file: str, output_file: str, output_texts: str, n_recipes: int = 0):
+def main(
+    *,
+    input_file: str,
+    output_file: str,
+    output_texts: str,
+    n_recipes: int = 0,
+):
     raw_recipe_data = load_recipe_data(
         data_file=(path.DATA_DIR / input_file),
         limit_n_recipes=n_recipes,
         recipe_choices=output_texts,
     )
-
     id_steps = list(
         zip(
             raw_recipe_data.index.values.tolist(),
             raw_recipe_data["steps"].values.tolist(),
         )
     )
-    id_ings = list(
-        zip(
-            raw_recipe_data.index.values.tolist(),
-            raw_recipe_data["ingredients"].values.tolist(),
-        )
+    id_ings = zip(
+        raw_recipe_data.index.values,
+        raw_recipe_data["ingredients"].values,
     )
-    id_ings = [(ing, {"recipe_id": tup[0]}) for tup in id_ings for ing in eval(tup[1])]
+    individual_ings_by_id = sorted(
+        ((ing, tup[0]) for tup in id_ings for ing in eval(tup[1])), key=lambda x: x[1]
+    )
+    grouped_by_id = itertools.groupby(individual_ings_by_id, key=lambda x: x[1])
+    recipe_parsed_ings = {
+        key: {ing[0] for ing in group} for key, group in grouped_by_id
+    }
 
-    print(f"{len(id_steps)} recipes total to be processed")
     formatted_id_steps = [
         (step_str, {"recipe_id": id_steps_tup[0], "step_num": step_index})
         for id_steps_tup in id_steps
@@ -475,7 +484,6 @@ def main(*, input_file: str, output_file: str, output_texts: str, n_recipes: int
         fist.append((tup_mod, tup[1]))
     formatted_id_steps = fist
 
-    recipe_parsed_ings = parse_ings(texts=id_ings)
     recipe_parsed_data = parse_documents(texts=formatted_id_steps)
 
     output_data = {}
@@ -518,8 +526,11 @@ if __name__ == "__main__":
     parser.add_argument("--output_dir", type=str, required=True)
     parser.add_argument("--input_file", type=str, default="RAW_recipes.csv")
     parser.add_argument("--n_recipes", type=int, default=-1)
+    parser.add_argument("--seed", type=int, default=0)
 
     args = parser.parse_args()
+
+    np.random.seed(args.seed)
 
     n_rec = args.n_recipes
     input_file = args.input_file
