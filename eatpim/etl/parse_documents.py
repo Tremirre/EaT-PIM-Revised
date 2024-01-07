@@ -27,16 +27,17 @@ import time
 import argparse
 import os
 import itertools
+import tqdm
 
 nlp = spacy.load("en_core_web_trf")
+print("loaded spacy model")
+
 NON_STOP_WORDS = {"all", "everything"}
 
 
 def parse_documents(
     *, texts: List[Tuple[List[str], Dict[str, int]]]
 ) -> Dict[int, Dict[int, Doc]]:
-    start_time = time.time()
-
     # dictionary of the form {recipe_id: {step_num: doc}}
     output_dict = defaultdict(lambda: {})
 
@@ -45,8 +46,9 @@ def parse_documents(
     fixed_texts = (
         (text, (context["recipe_id"], context["step_num"])) for text, context in texts
     )
-    for doc, context in nlp.pipe(
-        fixed_texts, disable=["ner", "textcat", "token2vec"], as_tuples=True
+    for doc, context in tqdm.tqdm(
+        nlp.pipe(fixed_texts, disable=["ner", "textcat", "token2vec"], as_tuples=True),
+        total=total_count,
     ):
         res = process_doc(doc)
         if (
@@ -77,11 +79,6 @@ def parse_documents(
                 newres["step_string"] = res["step_string"]
                 res = newres
         output_dict[context[0]][context[1]] = res
-        count += 1
-        if count % 1000 == 0:
-            print(
-                f"recipe progress: {round(count/total_count, 4)} : {round(time.time()-start_time, 2)}s elapsed"
-            )
 
     return output_dict
 
@@ -454,6 +451,7 @@ def main(
         limit_n_recipes=n_recipes,
         recipe_choices=output_texts,
     )
+    print("loaded recipe data")
     id_steps = list(
         zip(
             raw_recipe_data.index.values.tolist(),
