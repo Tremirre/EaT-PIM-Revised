@@ -65,51 +65,56 @@ class Recommender:
                     target_idx=self.ingredient_index_maping[ingredient],
                 )
             case SimilarityMetric.INGREDIENT_OUTPUT:
-                return self.kg_calculator.calculate_ingredient_similarity(
-                    target_recipe=operation_recipe_key,
+                return self.kg_calculator.calculate_ingredient_output_similarity(
                     recipe_ops=self.operations[operation_recipe_key],
                     replace_ing=ingredient,
-                    ing_list=tuple(self.usage_counts.keys()),
-                )[0]
+                    all_ingredients=self.ingredients,
+                )
             case SimilarityMetric.RECIPE_OUTPUT:
-                return self.kg_calculator.calculate_ingredient_similarity(
+                return self.kg_calculator.calculate_recipe_output_similarity(
                     target_recipe=operation_recipe_key,
                     recipe_ops=self.operations[operation_recipe_key],
                     replace_ing=ingredient,
-                    ing_list=tuple(self.usage_counts.keys()),
-                )[1]
+                    all_ingredients=self.ingredients,
+                )
             case SimilarityMetric.INDIVIDUAL_INGREDIENT:
                 return self.kg_calculator.calculate_individual_ingredient_similarity(
                     target_ing=ingredient,
-                    ing_set=set(self.usage_counts.keys()),
+                    all_ingredients=self.ingredients,
                 )
             case SimilarityMetric.METADATA_WEIGHTED:
-                mapped_ingredient = self.categorisation[ingredient]
+                result = np.zeros(len(self.usage_counts))
+                mapped_target_ingredient = self.categorisation.get(ingredient)
+                if not mapped_target_ingredient:
+                    return result
+
                 ing_metadata_vector = self.metadata_matrix.loc[
-                    mapped_ingredient
+                    mapped_target_ingredient
                 ].to_numpy()
                 metadata_similarities = cosine_similarity(
                     ing_metadata_vector.reshape(1, -1), self.metadata_matrix.to_numpy()
                 ).flatten()
-                result = np.zeros(len(self.usage_counts))
+                metadata_sim_dict = {
+                    self.metadata_matrix.index[i]: metadata_similarities[i]
+                    for i in range(len(metadata_similarities))
+                }
                 for i, ingredient in enumerate(self.usage_counts.keys()):
-                    mapped_ingredient = self.categorisation[ingredient]
-                    result[i] = metadata_similarities[
-                        self.ingredient_index_maping[mapped_ingredient]
-                    ]
+                    mapped_ingredient = self.categorisation.get(ingredient)
+                    result[i] = metadata_sim_dict.get(mapped_ingredient, 0)
                 return result
 
     def _load_data(self) -> None:
         with open(self.path_to_recommender_data / INGREDIENTS_FILE, "r") as f:
-            self.ingredients = set(json.load(f))
+            ingredients = set(json.load(f))
 
         with open(self.path_to_recommender_data / RECIPES_FILE, "r") as f:
             self.graph_data = json.load(f)
 
-        self.recipe_data = graph.parse_graph_tree(self.graph_data, self.ingredients)
+        self.recipe_data = graph.parse_graph_tree(self.graph_data, ingredients)
         self.usage_counts = graph.get_ingredient_usage_counts_from_recipies(
             self.recipe_data
         )
+        self.ingredients = tuple(self.usage_counts.keys())
         self.ingredient_counts_vector = np.array(
             [self.usage_counts[ingredient] for ingredient in self.usage_counts.keys()]
         )

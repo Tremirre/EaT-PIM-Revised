@@ -1,6 +1,6 @@
 import numpy as np
 
-from functools import cache
+from typing import Iterable
 
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -45,50 +45,49 @@ class KnowledgeGraphCalculator:
 
         return stacked_score
 
-    def calculate_ingredient_similarity(
+    def calculate_ingredient_output_similarity(
+        self,
+        recipe_ops: dict | np.ndarray,
+        replace_ing: str,
+        all_ingredients: Iterable[str],
+    ) -> tuple[np.ndarray, np.ndarray]:
+        original_calc_vec = self._transE_calculation(recipe_ops, replace_ing)
+        calculated_sim_vec = np.zeros(len(all_ingredients))
+        for i, ing in enumerate(all_ingredients):
+            calc_recipe_vec = self._transE_calculation(recipe_ops, replace_ing, ing)
+
+            calculated_sim_vec[i] = cosine_similarity(
+                original_calc_vec.reshape(1, -1), calc_recipe_vec.reshape(1, -1)
+            )[0][0]
+        return calculated_sim_vec
+
+    def calculate_recipe_output_similarity(
         self,
         target_recipe: str,
         recipe_ops: dict | np.ndarray,
         replace_ing: str,
-        ing_list: tuple[str],
-    ) -> tuple[list[tuple[int, float]], list[tuple[int, float]]]:
-        original_calc_vec = self._transE_calculation(recipe_ops, replace_ing)
+        all_ingredients: Iterable[str],
+    ) -> tuple[np.ndarray, np.ndarray]:
         original_recipe_vec = self.entity_embeddings[
             self.entity_id_mapping[target_recipe]
         ]
-        calculated_sim = {}
-        original_sim = {}
-        for ing in ing_list:
+        recipe_output_vec = np.zeros(len(all_ingredients))
+        for i, ing in enumerate(all_ingredients):
             calc_recipe_vec = self._transE_calculation(recipe_ops, replace_ing, ing)
-
-            calculated_sim[ing] = cosine_similarity(
-                original_calc_vec.reshape(1, -1), calc_recipe_vec.reshape(1, -1)
-            )[0][0]
-            original_sim[ing] = cosine_similarity(
+            recipe_output_vec[i] = cosine_similarity(
                 original_recipe_vec.reshape(1, -1), calc_recipe_vec.reshape(1, -1)
             )[0][0]
 
-        sorted_sim_to_calc = sorted(
-            calculated_sim.items(), key=lambda x: x[1], reverse=True
-        )
-        sorted_sim_to_og = sorted(
-            original_sim.items(), key=lambda x: x[1], reverse=True
-        )
-        return sorted_sim_to_calc, sorted_sim_to_og
+        return recipe_output_vec
 
     def calculate_individual_ingredient_similarity(
-        self, target_ing: str, ing_set: set[str]
-    ) -> list[tuple[str, float]]:
+        self, target_ing: str, all_ingredients: Iterable[str]
+    ) -> np.ndarray:
         target_ing_emb = self.entity_embeddings[self.entity_id_mapping[target_ing]]
         sims = cosine_similarity(target_ing_emb.reshape(1, -1), self.entity_embeddings)[
             0
         ]
-
-        sim_dict = {
-            self.id_to_entity[i]: sims[i]
-            for i in range(len(sims))
-            if self.id_to_entity[i] in ing_set
-        }
-
-        sorted_sim = sorted(sim_dict.items(), key=lambda x: x[1], reverse=True)
-        return sorted_sim
+        result = np.zeros(len(all_ingredients))
+        for i, ing in enumerate(all_ingredients):
+            result[i] = sims[self.entity_id_mapping[ing]]
+        return result
